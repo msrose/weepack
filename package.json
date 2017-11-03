@@ -1,0 +1,23 @@
+{
+  "name": "weepack",
+  "version": "0.0.1",
+  "description": "A lil module bundler demonstrating how webpack works",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "webpack"
+  ],
+  "author": "Michael Rose <michael_rose@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-generator": "^6.26.0",
+    "babel-template": "^6.26.0",
+    "babel-traverse": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "babylon": "^6.18.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-msrose": "^1.0.0"
+  }
+}
