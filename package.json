@@ -1,7 +1,7 @@
 {
   "name": "weepack",
   "version": "0.0.1",
-  "description": "A lil module bundler demonstrating how webpack works",
+  "description": "A wee module bundler demonstrating how webpack works",
   "main": "index.js",
   "scripts": {},
   "keywords": [
@@ -16,6 +16,14 @@
     "babel-types": "^6.26.0",
     "babylon": "^6.18.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msrose/weepack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/msrose/weepack/issues"
+  },
+  "homepage": "https://github.com/msrose/weepack#readme",
   "devDependencies": {
     "eslint": "^4.10.0",
     "eslint-config-msrose": "^1.0.0"
