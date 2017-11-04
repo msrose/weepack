@@ -7,11 +7,19 @@ const babylon = require('babylon');
 const traverse = require('babel-traverse').default;
 const generate = require('babel-generator').default;
 const template = require('babel-template');
-const t = require('babel-types');
+const types = require('babel-types');
 
 const [entry] = process.argv.slice(2);
 
 const entryAbsolutePath = require.resolve(entry);
+
+const getModuleIdForFile = fileAbsolutePath => {
+  return fileAbsolutePath;
+};
+
+const getAstNodeForModuleId = moduleId => {
+  return types.stringLiteral(moduleId);
+};
 
 const filesToProcess = [entryAbsolutePath];
 const moduleAsts = {};
@@ -34,9 +42,9 @@ while(filesToProcess.length > 0) {
       );
       const dependencyAbsolutePath = require.resolve(dependencyResolutionPath);
 
-      const moduleId = dependencyAbsolutePath;
+      const moduleId = getModuleIdForFile(dependencyAbsolutePath);
 
-      node.arguments[0] = t.stringLiteral(moduleId);
+      node.arguments[0] = getAstNodeForModuleId(moduleId);
 
       if(!moduleAsts[moduleId]) {
         filesToProcess.push(dependencyAbsolutePath);
@@ -44,7 +52,7 @@ while(filesToProcess.length > 0) {
     }
   });
 
-  const moduleId = fileAbsolutePath;
+  const moduleId = getModuleIdForFile(fileAbsolutePath);
 
   moduleAsts[moduleId] = ast;
 }
@@ -57,7 +65,7 @@ const buildModuleRegistration = template(`
 
 const moduleRegistrationAsts = Object.entries(moduleAsts).map(([id, ast]) => {
   return buildModuleRegistration({
-    MODULE_ID: t.stringLiteral(id),
+    MODULE_ID: getAstNodeForModuleId(id),
     MODULE_CONTENTS: ast
   });
 });
@@ -81,9 +89,11 @@ const buildBundle = template(`
   })();
 `);
 
+const entryModuleId = getModuleIdForFile(entryAbsolutePath);
+
 const bundleAst = buildBundle({
   MODULE_REGISTRATIONS: moduleRegistrationAsts,
-  ENTRY_MODULE_ID: t.stringLiteral(entryAbsolutePath)
+  ENTRY_MODULE_ID: getAstNodeForModuleId(entryModuleId)
 });
 
 const bundleCode = generate(bundleAst).code;
