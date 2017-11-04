@@ -9,7 +9,7 @@ const generate = require('babel-generator').default;
 const template = require('babel-template');
 const types = require('babel-types');
 
-const [entry] = process.argv.slice(2);
+const [entry, outputFile] = process.argv.slice(2);
 
 const entryAbsolutePath = require.resolve(entry);
 
@@ -98,4 +98,8 @@ const bundleAst = buildBundle({
 
 const bundleCode = generate(bundleAst).code;
 
-console.log(bundleCode);
+if(outputFile) {
+  fs.writeFileSync(outputFile, bundleCode);
+} else {
+  console.log(bundleCode);
+}
