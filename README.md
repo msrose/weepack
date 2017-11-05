@@ -1,7 +1,15 @@
 # weepack
 
-A lil module bundler demonstrating how Webpack works
+A wee module bundler demonstrating how Webpack works
+
+## Usage
 
 ```
-node index.js ./modules/entry.js > bundle.js
+node index.js <entry_file> [<output_file>]
+```
+
+For example:
+
+```
+node index.js ./modules/entry.js bundle.js
 ```
