@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 8
+    ecmaVersion: 6
   },
   extends: 'msrose',
   env: {
