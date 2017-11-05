@@ -1,6 +1,6 @@
 'use strict';
 
-// Weepack - A wee module bundle demonstrating how Webpack works
+// Weepack - A wee module bundler demonstrating how Webpack works
 // By Michael Rose (@msrose)
 // License: MIT (https://github.com/msrose/weepack/blob/master/LICENSE)
 
@@ -258,8 +258,8 @@ const bundleAst = buildBundle({
 // simply retrieves an actual string representation of the code from the AST.
 const bundleCode = generate(bundleAst).code;
 
-// As a final step, we write the bundle code to the output file. If we we're
-// given an output file, we just write it to stdout.
+// As a final step, we write the bundle code to the output file. If we weren't
+// given an output file, we just write the code to stdout.
 if(outputFile) {
   fs.writeFileSync(outputFile, bundleCode);
 } else {
