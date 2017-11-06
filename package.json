@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "A wee module bundler demonstrating how webpack works",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "write-source": "node scripts/write-source.js && eslint --fix source.js",
+    "bundle": "node index.js ./modules/entry.js examples/bundle.js"
+  },
   "keywords": [
     "webpack"
   ],

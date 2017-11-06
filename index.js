@@ -1,7 +1,7 @@
 /*
  * Weepack - A wee module bundler demonstrating how Webpack works
  * By Michael Rose (@msrose)
- * License: MIT (https://github.com/msrose/weepack/blob/master/LICENSE)
+ * @license MIT (https://github.com/msrose/weepack/blob/master/LICENSE)
  */
 
 'use strict';
@@ -268,7 +268,7 @@ const moduleRegistrationAsts = Object.entries(moduleAsts).map(([id, ast]) => {
  *   are only ever executed once.
  */
 const buildBundle = template(`
-  void (function() {
+  (function() {
     var modules = {};
     MODULE_REGISTRATIONS
 
@@ -305,8 +305,10 @@ const bundleAst = buildBundle({
 /*
  * We use babel-generator to get the code from the AST. The generate function
  * simply retrieves an actual string representation of the code from the AST.
+ * The `retainFunctionParens` option makes sure the IIFE wrapping the bundle
+ * still has parentheses around it.
  */
-const bundleCode = generate(bundleAst).code;
+const bundleCode = generate(bundleAst, { retainFunctionParens: true }).code;
 
 /*
  * As a final step, we write the bundle code to the output file. If we weren't
